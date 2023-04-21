@@ -17,7 +17,7 @@ embeddings = model.encode(sentence)
 vector_embeddings = repr(list(embeddings)[0])[6:-22]
 
 # Replace with the URL you want to send the request to
-url = 'http://localhost:8983/solr/ms-marco/select?fl=id,text,score'
+url = 'http://localhost:8983/solr/neural/select?fl=id,text,score'
 query = {
     "query": "{!knn f=vector topK=3}" + vector_embeddings
 }

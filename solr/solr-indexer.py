@@ -3,7 +3,7 @@ import pysolr
 import time
 
 ## Solr configuration
-SOLR_ADDRESS = 'http://localhost:8983/solr/ms-marco'
+SOLR_ADDRESS = 'http://localhost:8983/solr/neural'
 
 BATCH_SIZE = 100
 # Create a client instance

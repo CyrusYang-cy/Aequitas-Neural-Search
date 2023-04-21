@@ -1,0 +1,5 @@
+bin/
+example/cloud/
+legacy/configsets/tes_core_2/data/
+server/logs/
+server/solr/configsets/testing/

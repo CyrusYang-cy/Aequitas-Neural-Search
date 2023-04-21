@@ -2,8 +2,9 @@ import sys
 import pysolr
 import time
 
-## Solr configuration
-SOLR_ADDRESS = 'http://localhost:8983/solr/neural'
+# Solr configuration
+# SOLR_ADDRESS = 'http://localhost:8983/solr/neural'
+SOLR_ADDRESS = 'http://localhost:8983/solr/aequitas_test'
 
 BATCH_SIZE = 100
 # Create a client instance
@@ -22,7 +23,8 @@ def index_documents(documents_filename, embedding_filename):
                 vector = [float(w) for w in vector_string.split(",")]
                 doc = {
                     "id": str(index),
-                    "text": document,
+                    "title": document,
+                    "content": document,
                     "vector": vector
                 }
                 # append JSON document to a list
@@ -46,7 +48,9 @@ def main():
     initial_time = time.time()
     index_documents(document_filename, embedding_filename)
     finish_time = time.time()
-    print('Documents indexed in {:f} seconds\n'.format(finish_time - initial_time))
+    print('Documents indexed in {:f} seconds\n'.format(
+        finish_time - initial_time))
+
 
 if __name__ == "__main__":
     main()

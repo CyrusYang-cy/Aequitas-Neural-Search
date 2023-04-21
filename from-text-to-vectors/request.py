@@ -17,9 +17,9 @@ embeddings = model.encode(sentence)
 vector_embeddings = repr(list(embeddings)[0])[6:-22]
 
 # Replace with the URL you want to send the request to
-url = 'http://localhost:8983/solr/neural/select?fl=id,text,score'
+url = 'http://localhost:8983/solr/aequitas_test/select?fl=id,title,score'
 query = {
-    "query": "{!knn f=vector topK=3}" + vector_embeddings
+    "query": "{!knn f=vector topK=5}" + vector_embeddings
 }
 headers = {
     "Content-type": "application/json"

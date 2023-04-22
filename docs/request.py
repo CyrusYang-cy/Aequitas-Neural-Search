@@ -4,7 +4,6 @@ import sys
 from sentence_transformers import SentenceTransformer
 
 # A sentence to encode
-# sentence = ["what is the gre test"]
 sentence = [sys.argv[1]]  # Get the sentence from the command line argument
 
 # Load or create a SentenceTransformer model
@@ -17,17 +16,22 @@ embeddings = model.encode(sentence)
 vector_embeddings = repr(list(embeddings)[0])[6:-22]
 
 # Replace with the URL you want to send the request to
-url = 'http://localhost:8983/solr/aequitas_test/select?fl=id,title,score'
+url = 'http://localhost:8983/solr/aequitas_test/select'
+# set the query parameters
+params = {
+    'fl': 'id, title, score',
+}
 query = {
-    "query": "{!knn f=vector topK=5}" + vector_embeddings
+    "query": "{!knn f=vector topK=3}" + vector_embeddings,
+    # "filter": "id:(* AND NOT 909 AND NOT 2648)",
 }
 headers = {
     "Content-type": "application/json"
 }
 
-response = requests.post(url, data=json.dumps(query), headers=headers)
+response = requests.post(url, data=json.dumps(
+    query), headers=headers, params=params)
 
-# print(response.text)  # This will print the returned result
 # Parse the JSON response and print only the 'response' dictionary
 response_json = json.loads(response.text)
 print(json.dumps(response_json['response'], indent=2))

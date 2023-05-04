@@ -17,7 +17,7 @@ if args.keywords:
 else:
     keywords = "*"
 
-url = 'http://localhost:5001/solr/select'
+url = 'http://localhost:5001/solr/search'
 # set the query parameters
 params = {
     'fl': 'id, title, score, content',
